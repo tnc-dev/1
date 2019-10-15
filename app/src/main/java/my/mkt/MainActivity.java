@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.list);
 
         Intent intent= new Intent(this, MyService.class);
-        intent.putExtra("url","http://192.168.2.114/mnsk/blackbox.php?action=list&user=user&password=111&start=2018-10-17&end=2018-10-22");
+        intent.putExtra("url","http://192.168.2.107/mnsk/blackbox.php?action=list&user=user&password=111&start=2018-10-17&end=2018-10-22");
         intent.putExtra("type","list");
         startService(intent);
 
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickStart(View v) {
-        startService(new Intent(this, MyService.class).putExtra("url","http://192.168.2.114/mnsk/blackbox.php?action=download&user=user&password=111&date=2018-10-19&type=media" ));
+        startService(new Intent(this, MyService.class).putExtra("url","http://192.168.2.107/mnsk/blackbox.php?action=download&user=user&password=111&date=2018-10-19&type=media" ));
     }
 
     public void onClickStop(View v) {

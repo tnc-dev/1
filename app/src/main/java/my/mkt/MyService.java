@@ -9,23 +9,18 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyService extends Service {
 
    final String LOG_TAG = "myLogs";
-   public List<String> listFile;
+   public List<AsyncTask<String, String, List<String>>> listFile;
 
     public void onCreate() {
 
@@ -55,34 +50,20 @@ public class MyService extends Service {
     public String[] someTask(String url, String type) {
         //скачивание файлов
         if (type.equals("list")){
-            listFile=new ArrayList<String>();
+            listFile=new ArrayList<AsyncTask<String, String, List<String>>>();
            // listFile.add();
-
+           new ConnectToURL().execute(url);
         }
         else if (type.equals("download")) {
-            final DownloadFileFromURL downloadTask = new DownloadFileFromURL(this);
-            downloadTask.execute(url);
+          new DownloadFileFromURL().execute(url);
         }
         return null;
     }
 
-    class DownloadFileFromURL extends AsyncTask<String, String, String> {
+    private class DownloadFileFromURL extends AsyncTask<String, String, String> {
         private Context context;
         private PowerManager.WakeLock mWakeLock;
 
-
-        public DownloadFileFromURL(Context context){
-            this.context=context;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        /**
-         * Downloading file in background thread
-         * */
         @Override
         protected String doInBackground(String... f_url) {
             int count;

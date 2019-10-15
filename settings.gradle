@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':okhttp-3.9.0', ':unirest-java-1.4.7', ':jaxp-api-1.4.5'
 rootProject.name='MKT'
